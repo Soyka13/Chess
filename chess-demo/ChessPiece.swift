@@ -28,6 +28,9 @@ class ChessPiece {
         self.location = location
     }
   
+    func isValidMove(startX : Int, startY : Int, destinationX : Int, destinstionY : Int) -> Bool {
+        return false
+    }
 
 }
 
