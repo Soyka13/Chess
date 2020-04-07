@@ -64,6 +64,7 @@
 		B656DC1A243505A300B4E2AF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B647305D243C6BFF009A6EF9 /* Board.swift */,
 				B6B545D223C09CD400D0A8A7 /* BoardViewController.swift */,
 				B6B545E523C09F3500D0A8A7 /* BoardView.swift */,
 			);
@@ -117,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				B6D8F18D243770940052AF5C /* Rook.swift */,
-				B647305D243C6BFF009A6EF9 /* Board.swift */,
 				B6D8F18F2437709F0052AF5C /* Pawn.swift */,
 				B6D8F191243770AC0052AF5C /* Knight.swift */,
 				B6D8F193243770BE0052AF5C /* Bishop.swift */,
