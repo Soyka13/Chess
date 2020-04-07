@@ -8,13 +8,15 @@
 
 import UIKit
 class BoardViewController: UIViewController, ChessDelegate {
-    
+  
+
 var chessEngine = ChessEngine()
 @IBOutlet weak var boardView: BoardView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //initializing a game
         chessEngine.initializeGame()
         boardView.pieces = chessEngine.pieces
         boardView.setNeedsDisplay()
@@ -23,7 +25,6 @@ var chessEngine = ChessEngine()
     }
     
     func movePiece(fromX: Int, fromY: Int, toX: Int, toY: Int) {
-//        chessEngine.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         chessEngine.movePiece(fromX: fromX, fromY: fromY, toX: toX, toY: toY)
         boardView.pieces = chessEngine.pieces
         boardView.setNeedsDisplay()

@@ -73,23 +73,5 @@ class ChessEngine {
             pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (i,6)))
         }
         
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (0,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (1,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (2,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (3,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (4,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (5,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (6,1)))
-//        pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (7,1)))
-//        
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (0,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (1,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (2,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (3,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (4,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (5,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (6,6)))
-//        pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (7,6)))
-        
     }
 }

@@ -20,7 +20,7 @@ class ChessPiece {
     var pieceImage : String
     var pieceColor : PieceColor!
     var location : (x: Int, y: Int)
-    
+    var nextMoves = [(x: Int, y: Int)]()
     
     init(pieceImage : String, pieceColor : PieceColor!, location: (Int, Int)) {
         self.pieceImage = pieceImage
@@ -30,6 +30,10 @@ class ChessPiece {
   
     func isValidMove(startX : Int, startY : Int, destinationX : Int, destinstionY : Int) -> Bool {
         return false
+    }
+    
+    func setNextMoves(){
+        
     }
 
 }
