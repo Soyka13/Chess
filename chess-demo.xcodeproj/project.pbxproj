@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B647305E243C6BFF009A6EF9 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647305D243C6BFF009A6EF9 /* Board.swift */; };
 		B6B545CF23C09CD400D0A8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B545CE23C09CD400D0A8A7 /* AppDelegate.swift */; };
 		B6B545D123C09CD400D0A8A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B545D023C09CD400D0A8A7 /* SceneDelegate.swift */; };
 		B6B545D323C09CD400D0A8A7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B545D223C09CD400D0A8A7 /* BoardViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B647305D243C6BFF009A6EF9 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		B6B545CB23C09CD400D0A8A7 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B545CE23C09CD400D0A8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6B545D023C09CD400D0A8A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D8F18D243770940052AF5C /* Rook.swift */,
+				B647305D243C6BFF009A6EF9 /* Board.swift */,
 				B6D8F18F2437709F0052AF5C /* Pawn.swift */,
 				B6D8F191243770AC0052AF5C /* Knight.swift */,
 				B6D8F193243770BE0052AF5C /* Bishop.swift */,
@@ -197,6 +200,7 @@
 			files = (
 				B6B545D323C09CD400D0A8A7 /* BoardViewController.swift in Sources */,
 				B6B545D923C09CD400D0A8A7 /* chess_demo.xcdatamodeld in Sources */,
+				B647305E243C6BFF009A6EF9 /* Board.swift in Sources */,
 				B6B545E623C09F3500D0A8A7 /* BoardView.swift in Sources */,
 				B6D8F196243770D30052AF5C /* Queen.swift in Sources */,
 				B6D8F1902437709F0052AF5C /* Pawn.swift in Sources */,
