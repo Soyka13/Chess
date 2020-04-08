@@ -10,9 +10,11 @@ import UIKit
 
 class BoardView: UIView {
     var pieces = Set<ChessPiece>()
-    var chessDelegate : ChessDelegate?
-    var fromX = -1
-    var fromY = -1
+    var chessDelegate : ChessEventDelegate?
+    var fromRow = -1
+    var fromCol = -1
+    
+    
     
     override func draw(_ rect: CGRect) {
         drawBoard()
@@ -20,49 +22,54 @@ class BoardView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let cellSize = self.frame.width / 8
         let touch = touches.first!
         let fingerLocation = touch.location(in: self)
-        fromX = Int(fingerLocation.x / 50)
-        fromY = Int(fingerLocation.y / 50)
+        fromRow = Int(fingerLocation.x / cellSize)
+        fromCol = Int(fingerLocation.y / cellSize)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let cellSize = self.frame.width / 8
         let touch = touches.first!
         let fingerLocation = touch.location(in: self)
-        let toX = Int(fingerLocation.x / 50)
-        let toY = Int(fingerLocation.y / 50)
-        chessDelegate?.movePiece(fromX: fromX, fromY: fromY, toX: toX, toY: toY)
+        let toRow = Int(fingerLocation.x / cellSize)
+        let toCol = Int(fingerLocation.y / cellSize)
+        chessDelegate?.movePiece(fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol)
     }
     
     func drawPieces(){
+        let cellSize : Double = Double(self.frame.width / 8)
         for piece in pieces {
             let pieceImage = UIImage(named: piece.pieceImage)
-            pieceImage?.draw(in: CGRect(x: piece.location.x*50, y: piece.location.y*50, width: 50, height: 50))
+            pieceImage?.draw(in: CGRect(x: Double(piece.location.row)*cellSize, y: Double(piece.location.col)*cellSize, width: cellSize, height: cellSize))
         }
     }
     
-    
     func drawBoard() {
-        drawTwoRowsAt(y: 0 * 50)
-        drawTwoRowsAt(y: 2 * 50)
-        drawTwoRowsAt(y: 4 * 50)
-        drawTwoRowsAt(y: 6 * 50)
+        let cellSize = self.frame.width / 8
+        drawTwoRowsAt(y: 0 * cellSize)
+        drawTwoRowsAt(y: 2 * cellSize)
+        drawTwoRowsAt(y: 4 * cellSize)
+        drawTwoRowsAt(y: 6 * cellSize)
     }
     
     func drawTwoRowsAt(y: CGFloat) {
-        drawSquareAt(x: 1*50, y: y)
-        drawSquareAt(x: 3*50, y: y)
-        drawSquareAt(x: 5*50, y: y)
-        drawSquareAt(x: 7*50, y: y)
+        let cellSize = self.frame.width / 8
+        drawSquareAt(x: 1*cellSize, y: y)
+        drawSquareAt(x: 3*cellSize, y: y)
+        drawSquareAt(x: 5*cellSize, y: y)
+        drawSquareAt(x: 7*cellSize, y: y)
         
-        drawSquareAt(x: 0*50, y: y + 50)
-        drawSquareAt(x: 2*50, y: y + 50)
-        drawSquareAt(x: 4*50, y: y + 50)
-        drawSquareAt(x: 6*50, y: y + 50)
+        drawSquareAt(x: 0*cellSize, y: y + cellSize)
+        drawSquareAt(x: 2*cellSize, y: y + cellSize)
+        drawSquareAt(x: 4*cellSize, y: y + cellSize)
+        drawSquareAt(x: 6*cellSize, y: y + cellSize)
     }
     
     func drawSquareAt(x: CGFloat, y: CGFloat) {
-        let path = UIBezierPath(rect: CGRect(x: x, y: y, width: 50, height: 50))
+        let cellSize = self.frame.width / 8
+        let path = UIBezierPath(rect: CGRect(x: x, y: y, width: cellSize, height: cellSize))
         UIColor.lightGray.setFill()
         path.fill()
     }

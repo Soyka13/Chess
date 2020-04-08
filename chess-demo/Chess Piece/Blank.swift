@@ -1,5 +1,5 @@
 //
-//  Board.swift
+//  Blank.swift
 //  chess-demo
 //
 //  Created by Helen Stepaniuk on 07.04.2020.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+
+class Blank: ChessPiece {
+    
+}

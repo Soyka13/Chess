@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+
+class Pawn: ChessPiece {
+    
+//    override init(pieceImage : String, pieceColor : PieceColor!, location: (Int, Int), type : PieceType){
+//        super.init(pieceImage: pieceImage, pieceColor: pieceColor, location: location, type: type)
+//    }
+    
+    
+}

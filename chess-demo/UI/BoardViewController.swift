@@ -7,27 +7,40 @@
 //
 
 import UIKit
-class BoardViewController: UIViewController, ChessDelegate {
-  
 
-var chessEngine = ChessEngine()
-@IBOutlet weak var boardView: BoardView!
+class BoardViewController: UIViewController, GameEventDelegate {
+    
+    
+    @IBOutlet weak var boardView: BoardView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //initializing a game
-        chessEngine.initializeGame()
-        boardView.pieces = chessEngine.pieces
+        let gameController = GameController()
+        
+        gameController.gameEventDelegate = self
+//        boardView.pieces = chessEngine.piecess
         boardView.setNeedsDisplay()
         
-        boardView.chessDelegate = self
+        boardView.chessDelegate = gameController
     }
     
-    func movePiece(fromX: Int, fromY: Int, toX: Int, toY: Int) {
-        chessEngine.movePiece(fromX: fromX, fromY: fromY, toX: toX, toY: toY)
-        boardView.pieces = chessEngine.pieces
-        boardView.setNeedsDisplay()
+//
+//    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
+//        chessEngine.movePiece(fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol)
+//        boardView.pieces = chessEngine.pieces
+//        boardView.setNeedsDisplay()
+//    }
+    
+    func onStart(pieces : Set<ChessPiece>){
+        boardView.pieces = pieces
+    }
+    func onUpdate(){
+        
+    }
+    func onFinish(){
+        
     }
 }
 
