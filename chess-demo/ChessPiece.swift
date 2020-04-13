@@ -10,27 +10,17 @@ import Foundation
 
 // A basic abstract class to represent a game figure
 class ChessPiece {
-    var pieceImage : String
     var pieceColor : PieceColor!
     var location : (row: Int, col: Int)
-    var nextMoves = [(row: Int, col: Int)]()
-    var type : PieceType
     
-    init(pieceImage : String, pieceColor : PieceColor!, location: (Int, Int), type : PieceType) {
-        self.pieceImage = pieceImage
+    init(pieceColor : PieceColor!, location: (Int, Int)) {
         self.pieceColor = pieceColor
         self.location = location
-        self.type = type
     }
     
-    func isValidMove(startRow : Int, startCol : Int, destinationRow : Int, destinstionCol : Int) -> Bool {
+    func isValidMove(startRow : Int, startCol : Int, destinationRow : Int, destinationCol : Int, isBeating : Bool) -> Bool {
         return false
     }
-    
-    func setNextMoves(){
-        return
-    }
-    
 }
 
 

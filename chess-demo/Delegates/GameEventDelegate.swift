@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameEventDelegate {
-    func onStart(pieces : Set<ChessPiece>)
+    func onStart(pieces : [[ChessPiece]])
     func onUpdate()
     func onFinish()
 }

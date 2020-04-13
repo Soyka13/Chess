@@ -9,69 +9,35 @@
 import Foundation
 
 class ChessEngine {
-    var pieces = Set<ChessPiece>()
-    
-    func pieceAt(row: Int, col: Int) -> ChessPiece? {
-        for piece in pieces {
-            if piece.location.row == row && piece.location.col == col {
-                return piece
-            }
-        }
-        return nil
-    }
-    
-    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int){
-        guard let movingPiece = pieceAt(row: fromRow, col: fromCol)
-            else {
-                return
-        }
+    func generateStartBoard() -> Board {
+        var pieces : [[ChessPiece]] = Array(repeating: Array(repeating: Blank(), count: 8), count: 8)
         
-        pieces.remove(movingPiece)
-        pieces.insert(ChessPiece(pieceImage: movingPiece.pieceImage, pieceColor: movingPiece.pieceColor, location: (toRow, toCol), type: movingPiece.type))
-    }
-    
-    func initializeGame() {
-        pieces.removeAll()
+        pieces[0][0] = Rook(pieceColor: .Black, location: (0,0))
+        pieces[7][0] = Rook(pieceColor: .Black, location: (7,0))
+        pieces[0][7] = Rook(pieceColor: .White, location: (0,7))
+        pieces[7][7] = Rook(pieceColor: .White, location: (7,7))
         
-        let blackPawn = "black_pawn"
-        let whitePawn = "white_pawn"
-        let blackRook = "black_rook"
-        let whiteRook = "white_rook"
-        let blackKnight = "black_knight"
-        let whiteKnight = "white_knight"
-        let blackBishop = "black_bishop"
-        let whiteBishop = "white_bishop"
-        let blackQueen = "black_queen"
-        let whiteQueen = "white_queen"
-        let blackKing = "black_king"
-        let whiteKing = "white_king"
+        pieces[1][0] = Knight(pieceColor: .Black, location: (1,0))
+        pieces[6][0] = Knight(pieceColor: .Black, location: (6,0))
+        pieces[1][7] = Knight(pieceColor: .White, location: (1,7))
+        pieces[6][7] = Knight(pieceColor: .White, location: (6,7))
         
-        pieces.insert(ChessPiece(pieceImage: blackRook, pieceColor: .Black, location: (0,0), type: .Rook))
-        pieces.insert(ChessPiece(pieceImage: blackRook, pieceColor: .Black, location: (7,0), type: .Rook))
-        pieces.insert(ChessPiece(pieceImage: whiteRook, pieceColor: .White, location: (0,7), type: .Rook))
-        pieces.insert(ChessPiece(pieceImage: whiteRook, pieceColor: .White, location: (7,7), type: .Rook))
+        pieces[2][0] = Bishop(pieceColor: .Black, location: (2,0))
+        pieces[5][0] = Bishop(pieceColor: .Black, location: (5,0))
+        pieces[2][7] = Bishop(pieceColor: .White, location: (2,7))
+        pieces[5][7] = Bishop(pieceColor: .White, location: (5,7))
         
-        pieces.insert(ChessPiece(pieceImage: blackKnight, pieceColor: .Black, location: (1,0), type: .Knight))
-        pieces.insert(ChessPiece(pieceImage: blackKnight, pieceColor: .Black, location: (6,0), type: .Knight))
-        pieces.insert(ChessPiece(pieceImage: whiteKnight, pieceColor: .White, location: (1,7), type: .Knight))
-        pieces.insert(ChessPiece(pieceImage: whiteKnight, pieceColor: .White, location: (6,7), type: .Knight))
+        pieces[3][0] = Queen(pieceColor: .Black, location: (3,0))
+        pieces[3][7] = Queen(pieceColor: .White, location: (3,7))
         
-        pieces.insert(ChessPiece(pieceImage: blackBishop, pieceColor: .Black, location: (2,0), type: .Bishop))
-        pieces.insert(ChessPiece(pieceImage: blackBishop, pieceColor: .Black, location: (5,0), type: .Bishop))
-        pieces.insert(ChessPiece(pieceImage: whiteBishop, pieceColor: .White, location: (2,7), type: .Bishop))
-        pieces.insert(ChessPiece(pieceImage: whiteBishop, pieceColor: .White, location: (5,7), type: .Bishop))
-        
-        pieces.insert(ChessPiece(pieceImage: blackQueen, pieceColor: .Black, location: (3,0), type: .Queen))
-        pieces.insert(ChessPiece(pieceImage: whiteQueen, pieceColor: .White, location: (3,7), type: .Queen))
-        
-        pieces.insert(ChessPiece(pieceImage: blackKing, pieceColor: .Black, location: (4,0), type: .King))
-        pieces.insert(ChessPiece(pieceImage: whiteKing, pieceColor: .White, location: (4,7), type: .King))
-        
+        pieces[4][0] = King(pieceColor: .Black, location: (4,0))
+        pieces[4][7] = King(pieceColor: .White, location: (4,7))
         
         for i in 0...7 {
-            pieces.insert(ChessPiece(pieceImage: blackPawn, pieceColor: .Black, location: (i,1), type: .Pawn))
-            pieces.insert(ChessPiece(pieceImage: whitePawn, pieceColor: .White, location: (i,6), type: .Pawn))
+            pieces[i][1] = Pawn(pieceColor: .Black, location: (i,1))
+            pieces[i][6] = Pawn(pieceColor: .White, location: (i,6))
         }
         
+        return Board(pieces: pieces)
     }
 }

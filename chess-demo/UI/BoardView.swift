@@ -9,68 +9,110 @@
 import UIKit
 
 class BoardView: UIView {
-    var pieces = Set<ChessPiece>()
+    var pieces = [[ChessPiece]]()
     var chessDelegate : ChessEventDelegate?
-    var fromRow = -1
-    var fromCol = -1
+    var selectedCell = (row : -1, col: -1)
+    var cellSize : CGFloat {
+        get {
+            self.frame.width / 8
+        }
+    }
     
-    
+    func update() {
+        selectedCell = (-1, -1)
+        setNeedsDisplay()
+    }
     
     override func draw(_ rect: CGRect) {
         drawBoard()
         drawPieces()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let cellSize = self.frame.width / 8
-        let touch = touches.first!
-        let fingerLocation = touch.location(in: self)
-        fromRow = Int(fingerLocation.x / cellSize)
-        fromCol = Int(fingerLocation.y / cellSize)
+        drawSelectedCell()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let cellSize = self.frame.width / 8
-        let touch = touches.first!
-        let fingerLocation = touch.location(in: self)
-        let toRow = Int(fingerLocation.x / cellSize)
-        let toCol = Int(fingerLocation.y / cellSize)
-        chessDelegate?.movePiece(fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol)
-    }
-    
-    func drawPieces(){
-        let cellSize : Double = Double(self.frame.width / 8)
-        for piece in pieces {
-            let pieceImage = UIImage(named: piece.pieceImage)
-            pieceImage?.draw(in: CGRect(x: Double(piece.location.row)*cellSize, y: Double(piece.location.col)*cellSize, width: cellSize, height: cellSize))
+        if touches.first == nil {
+            return
+        }
+        
+        let (toRow, toCol) = getTouchedLocation(touch: touches.first!)
+        let isCellTheSame = selectedCell == (toRow, toCol)
+        
+        if (pieces[toRow][toCol].location != (-1, -1)) {
+            selectedCell = (isCellTheSame) ? (-1, -1) : (toRow, toCol)
+            setNeedsDisplay()
+        }
+        
+        if (!isCellTheSame) {
+            chessDelegate?.onCellSelected(row: toRow, col: toCol)
         }
     }
     
+    private func getTouchedLocation(touch: UITouch) -> (Int, Int) {
+        let fingerLocation = touch.location(in: self)
+        
+        let row = Int(fingerLocation.x / cellSize)
+        let col = Int(fingerLocation.y / cellSize)
+        
+        return (row, col)
+    }
+    
+    /*
+     * Methods for drawing game board.
+     */
+    
     func drawBoard() {
-        let cellSize = self.frame.width / 8
         drawTwoRowsAt(y: 0 * cellSize)
         drawTwoRowsAt(y: 2 * cellSize)
         drawTwoRowsAt(y: 4 * cellSize)
         drawTwoRowsAt(y: 6 * cellSize)
     }
     
-    func drawTwoRowsAt(y: CGFloat) {
-        let cellSize = self.frame.width / 8
-        drawSquareAt(x: 1*cellSize, y: y)
-        drawSquareAt(x: 3*cellSize, y: y)
-        drawSquareAt(x: 5*cellSize, y: y)
-        drawSquareAt(x: 7*cellSize, y: y)
-        
-        drawSquareAt(x: 0*cellSize, y: y + cellSize)
-        drawSquareAt(x: 2*cellSize, y: y + cellSize)
-        drawSquareAt(x: 4*cellSize, y: y + cellSize)
-        drawSquareAt(x: 6*cellSize, y: y + cellSize)
+    func drawPieces(){
+        for i in 0..<pieces.count {
+            for j in 0..<pieces.count {
+                if pieces[i][j] is Blank {
+                    continue
+                }
+                let pieceImage = UIImage(named: getIconResByChessPieceType(piece: pieces[i][j]))
+                pieceImage?.draw(in: CGRect(x: CGFloat(pieces[i][j].location.row)*cellSize, y: CGFloat(pieces[i][j].location.col)*cellSize, width: cellSize, height: cellSize))
+            }
+        }
     }
     
-    func drawSquareAt(x: CGFloat, y: CGFloat) {
+    func drawSelectedCell() {
+         if (selectedCell != (-1, -1)) {
+             drawSquareWithStrokeAt(x: CGFloat(selectedCell.row)*cellSize, y: CGFloat(selectedCell.col)*cellSize)
+         }
+    }
+    
+    func drawTwoRowsAt(y: CGFloat) {
+        drawSquareAt(x: 1*cellSize, y: y, color: .lightGray)
+        drawSquareAt(x: 3*cellSize, y: y, color: .lightGray)
+        drawSquareAt(x: 5*cellSize, y: y, color: .lightGray)
+        drawSquareAt(x: 7*cellSize, y: y, color: .lightGray)
+        
+        drawSquareAt(x: 0*cellSize, y: y + cellSize, color: .lightGray)
+        drawSquareAt(x: 2*cellSize, y: y + cellSize, color: .lightGray)
+        drawSquareAt(x: 4*cellSize, y: y + cellSize, color: .lightGray)
+        drawSquareAt(x: 6*cellSize, y: y + cellSize, color: .lightGray)
+    }
+    
+    func drawSquareAt(x: CGFloat, y: CGFloat, color : UIColor) {
         let cellSize = self.frame.width / 8
-        let path = UIBezierPath(rect: CGRect(x: x, y: y, width: cellSize, height: cellSize))
-        UIColor.lightGray.setFill()
+        let rect = CGRect(x: x, y: y, width: cellSize, height: cellSize)
+        let path = UIBezierPath(rect: rect)
+        
+        color.setFill()
         path.fill()
+    }
+    
+    func drawSquareWithStrokeAt(x: CGFloat, y: CGFloat) {
+        let rect = CGRect(x: x + 2, y: y + 2, width: cellSize - 4, height: cellSize - 4)
+        
+        let path = UIBezierPath(rect: rect)
+        
+        path.lineWidth = 3
+        UIColor.green.setStroke()
+        path.stroke()
     }
 }

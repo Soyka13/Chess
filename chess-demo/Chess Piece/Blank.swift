@@ -8,7 +8,8 @@
 
 import Foundation
 
-
 class Blank: ChessPiece {
-    
+    init() {
+        super.init(pieceColor: .Blank, location: (-1, -1))
+    }
 }

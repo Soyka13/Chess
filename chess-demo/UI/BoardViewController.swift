@@ -13,32 +13,29 @@ class BoardViewController: UIViewController, GameEventDelegate {
     
     @IBOutlet weak var boardView: BoardView!
     
+    let gameController = GameController()
+    var chessEngine = ChessEngine()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let gameController = GameController()
-        
         gameController.gameEventDelegate = self
-//        boardView.pieces = chessEngine.piecess
+   
         boardView.setNeedsDisplay()
-        
         boardView.chessDelegate = gameController
+        gameController.startGame()
     }
     
-//
-//    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
-//        chessEngine.movePiece(fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol)
-//        boardView.pieces = chessEngine.pieces
-//        boardView.setNeedsDisplay()
-//    }
-    
-    func onStart(pieces : Set<ChessPiece>){
+    /*
+     * GameEventDelegate mathods implementation.
+     */
+    func onStart(pieces : [[ChessPiece]]){
         boardView.pieces = pieces
     }
+    
     func onUpdate(){
-        
+        boardView.setNeedsDisplay()
     }
+    
     func onFinish(){
         
     }

@@ -11,16 +11,18 @@ import Foundation
 
 class GameController : ChessEventDelegate {
     var selectedChessPiece : ChessPiece?
-    
     var chessEngine = ChessEngine()
+    var gameEventDelegate : GameEventDelegate? 
+    var board : Board?
     
-    var gameEventDelegate : GameEventDelegate?
-    
-    func onChessPieceSelected(row : Int, col : Int){
-        
+    func startGame(){
+        board = self.chessEngine.generateStartBoard()
+        if let notNilBoard = board {
+            gameEventDelegate?.onStart(pieces: notNilBoard.pieces)
+        }
     }
     
-    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
+    func onCellSelected(row : Int, col : Int){
         
-    }
+    }    
 }
