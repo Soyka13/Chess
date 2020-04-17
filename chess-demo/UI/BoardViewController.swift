@@ -18,6 +18,7 @@ class BoardViewController: UIViewController, GameEventDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         gameController.gameEventDelegate = self
    
         boardView.setNeedsDisplay()
@@ -28,12 +29,12 @@ class BoardViewController: UIViewController, GameEventDelegate {
     /*
      * GameEventDelegate mathods implementation.
      */
-    func onStart(pieces : [[ChessPiece]]){
-        boardView.pieces = pieces
+    func onStart(board : Board){
+        boardView.board = board
     }
     
     func onUpdate(){
-        boardView.setNeedsDisplay()
+        boardView.update()
     }
     
     func onFinish(){

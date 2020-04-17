@@ -22,9 +22,20 @@ class Board {
         return false
     }
     
-    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int){
+    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
+        pieces[fromRow][fromCol].location = (toRow, toCol)
+        pieces[toRow][toCol] = pieces[fromRow][fromCol]
+        
+        pieces[fromRow][fromCol] = Blank()
         return
     }
     
+    func printBoard(){
+        for i in 0..<8 {
+            for j in 0..<8 {
+                print("At (\(i) , \(j)) - \(pieces[i][j])")
+            }
+        }
+    }
     
 }

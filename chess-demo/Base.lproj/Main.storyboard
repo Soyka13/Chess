@@ -32,6 +32,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="HJr-mK-wg2"/>
                     <connections>
                         <outlet property="boardView" destination="HRd-Ue-UNZ" id="4BW-Pt-o2V"/>
                     </connections>

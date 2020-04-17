@@ -15,8 +15,15 @@ class King: ChessPiece {
         super.init(pieceColor: pieceColor, location: location)
     }
     
-    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int, isBeating: Bool) -> Bool {
-        if(abs(destinationRow - startRow) <= 1 && abs(destinationCol - startCol) <= 1){
+    //    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int) -> Bool {
+    //        if(abs(destinationRow - startRow) <= 1 && abs(destinationCol - startCol) <= 1){
+    //            return true
+    //        }
+    //        return false
+    //    }
+    
+    override func isValidMove(startCell: (row: Int, col: Int), destinationCell: (row: Int, col: Int)) -> Bool {
+        if(abs(destinationCell.row - startCell.row) <= 1 && abs(destinationCell.col - startCell.col) <= 1){
             return true
         }
         return false

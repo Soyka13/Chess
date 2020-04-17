@@ -13,8 +13,15 @@ class Rook: ChessPiece {
         super.init(pieceColor: pieceColor, location: location)
     }
     
-    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int, isBeating: Bool) -> Bool {
-        if(destinationRow == startRow || destinationCol == startRow){
+    //    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int) -> Bool {
+    //        if(destinationRow == startRow || destinationCol == startRow){
+    //            return true
+    //        }
+    //        return false
+    //    }
+    
+    override func isValidMove(startCell: (row: Int, col: Int), destinationCell: (row: Int, col: Int)) -> Bool {
+        if(destinationCell.row == startCell.row || destinationCell.col == startCell.col){
             return true
         }
         return false

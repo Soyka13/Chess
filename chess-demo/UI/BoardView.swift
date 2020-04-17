@@ -9,8 +9,10 @@
 import UIKit
 
 class BoardView: UIView {
-    var pieces = [[ChessPiece]]()
+    
+    var board : Board?
     var chessDelegate : ChessEventDelegate?
+    
     var selectedCell = (row : -1, col: -1)
     var cellSize : CGFloat {
         get {
@@ -35,16 +37,20 @@ class BoardView: UIView {
         }
         
         let (toRow, toCol) = getTouchedLocation(touch: touches.first!)
+        if (!(0...7).contains(toRow) && !(0...7).contains(toCol)){
+            return
+        }
+        
         let isCellTheSame = selectedCell == (toRow, toCol)
         
-        if (pieces[toRow][toCol].location != (-1, -1)) {
-            selectedCell = (isCellTheSame) ? (-1, -1) : (toRow, toCol)
-            setNeedsDisplay()
+        if let notNilBoard = board {
+            if (notNilBoard.pieces[toRow][toCol].location != (-1, -1)) {
+                selectedCell = (isCellTheSame) ? (-1, -1) : (toRow, toCol)
+                setNeedsDisplay()
+            }
         }
         
-        if (!isCellTheSame) {
-            chessDelegate?.onCellSelected(row: toRow, col: toCol)
-        }
+        chessDelegate?.onCellSelected(row: toRow, col: toCol)
     }
     
     private func getTouchedLocation(touch: UITouch) -> (Int, Int) {
@@ -68,13 +74,15 @@ class BoardView: UIView {
     }
     
     func drawPieces(){
-        for i in 0..<pieces.count {
-            for j in 0..<pieces.count {
-                if pieces[i][j] is Blank {
-                    continue
+        if let notNilBoard = board {
+            for i in 0..<notNilBoard.pieces.count {
+                for j in 0..<notNilBoard.pieces.count {
+                    if notNilBoard.pieces[i][j] is Blank {
+                        continue
+                    }
+                    let pieceImage = UIImage(named: getIconResByChessPieceType(piece: notNilBoard.pieces[i][j]))
+                    pieceImage?.draw(in: CGRect(x: CGFloat(notNilBoard.pieces[i][j].location.row)*cellSize, y: CGFloat(notNilBoard.pieces[i][j].location.col)*cellSize, width: cellSize, height: cellSize))
                 }
-                let pieceImage = UIImage(named: getIconResByChessPieceType(piece: pieces[i][j]))
-                pieceImage?.draw(in: CGRect(x: CGFloat(pieces[i][j].location.row)*cellSize, y: CGFloat(pieces[i][j].location.col)*cellSize, width: cellSize, height: cellSize))
             }
         }
     }
