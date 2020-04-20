@@ -12,4 +12,8 @@ class Blank: ChessPiece {
     init() {
         super.init(pieceColor: .Blank, location: (-1, -1))
     }
+
+    init(_ location : (row : Int, col : Int)) {
+        super.init(pieceColor: .Blank, location: location)
+    }
 }

@@ -10,5 +10,8 @@ import Foundation
 
 
 protocol ChessEventDelegate {
-    func onCellSelected(row : Int, col : Int)
+
+    func onPieceSelected(_ selectedCell : (Int, Int))
+    func onPieceMoved(_ destinationCell : (Int, Int))
+    func onPieceBeat(_ beatedCell : (Int, Int))
 }

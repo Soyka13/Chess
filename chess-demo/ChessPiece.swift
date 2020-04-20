@@ -24,6 +24,10 @@ class ChessPiece {
     func isValidMove(startCell : (row: Int, col: Int), destinationCell : (row: Int, col: Int)) -> Bool {
         return false
     }
+
+    func isValidBeating(_ destinationCell: (row : Int, col : Int)) -> Bool {
+        return isValidMove(startCell: location, destinationCell: destinationCell)
+    }
 }
 
 

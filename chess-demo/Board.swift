@@ -22,12 +22,19 @@ class Board {
         return false
     }
     
-    func movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
-        pieces[fromRow][fromCol].location = (toRow, toCol)
-        pieces[toRow][toCol] = pieces[fromRow][fromCol]
+    func pieceAt(cell : ((row : Int, col : Int))) -> ChessPiece {
+        return pieces[cell.row][cell.col]
+    }
+    
+    func movePiece(fromCell: (row: Int, col: Int), toCell: (row: Int, col: Int)) {
+        pieces[fromCell.row][fromCell.col].location = (toCell.row, toCell.col)
+        pieces[toCell.row][toCell.col] = pieces[fromCell.row][fromCell.col]
         
-        pieces[fromRow][fromCol] = Blank()
-        return
+        pieces[fromCell.row][fromCell.col] = Blank()
+    }
+
+    func removePiece(_ selectedCell : (row : Int, col : Int), _ beatedCell : (row : Int, col : Int)) {
+        movePiece(fromCell: selectedCell, toCell: beatedCell)
     }
     
     func printBoard(){

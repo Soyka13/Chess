@@ -11,5 +11,6 @@ import Foundation
 protocol GameEventDelegate {
     func onStart(board : Board)
     func onUpdate()
+    func onCurrentPlayerChanged(currentPlayer : Player)
     func onFinish()
 }

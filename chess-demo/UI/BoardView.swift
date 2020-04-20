@@ -9,12 +9,12 @@
 import UIKit
 
 class BoardView: UIView {
-    
     var board : Board?
     var chessDelegate : ChessEventDelegate?
+    var currentPlayer : Player?
     
-    var selectedCell = (row : -1, col: -1)
-    var cellSize : CGFloat {
+    private var selectedCell = (row : -1, col: -1)
+    private var cellSize : CGFloat {
         get {
             self.frame.width / 8
         }
@@ -22,6 +22,7 @@ class BoardView: UIView {
     
     func update() {
         selectedCell = (-1, -1)
+        chessDelegate?.onPieceSelected(selectedCell)
         setNeedsDisplay()
     }
     
@@ -40,17 +41,8 @@ class BoardView: UIView {
         if (!(0...7).contains(toRow) && !(0...7).contains(toCol)){
             return
         }
-        
-        let isCellTheSame = selectedCell == (toRow, toCol)
-        
-        if let notNilBoard = board {
-            if (notNilBoard.pieces[toRow][toCol].location != (-1, -1)) {
-                selectedCell = (isCellTheSame) ? (-1, -1) : (toRow, toCol)
-                setNeedsDisplay()
-            }
-        }
-        
-        chessDelegate?.onCellSelected(row: toRow, col: toCol)
+
+        handleSelectedCell(toRow, toCol)
     }
     
     private func getTouchedLocation(touch: UITouch) -> (Int, Int) {
@@ -60,6 +52,32 @@ class BoardView: UIView {
         let col = Int(fingerLocation.y / cellSize)
         
         return (row, col)
+    }
+
+    private func handleSelectedCell(_ row : Int, _ col : Int) {
+        // onPieceSelected handling
+        if board?.pieceAt(cell: (row, col)).pieceColor == currentPlayer?.color {
+            let isCellTheSame = selectedCell == (row, col)
+            selectedCell = (isCellTheSame) ? (-1, -1) : (row, col)
+
+            setNeedsDisplay()
+            chessDelegate?.onPieceSelected(selectedCell)
+            return
+        }
+
+        // onPieceMoved handling
+        if selectedCell != (-1, -1) && board?.pieceAt(cell: (row, col)) is Blank {
+            chessDelegate?.onPieceMoved((row, col))
+            return
+        }
+
+        // onPieceBeat handling
+        if selectedCell != (-1, -1) {
+            let isEnemiesPiece = !(board?.pieceAt(cell: (row, col)) is Blank) && board?.pieceAt(cell: (row, col)).pieceColor != currentPlayer?.color
+            if (isEnemiesPiece) {
+                chessDelegate?.onPieceBeat((row, col))
+            }
+        }
     }
     
     /*

@@ -95,10 +95,7 @@ class Pawn: ChessPiece {
         return false
     }
     
-    func isValidBeating(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int, isBeating : Bool) -> Bool {
-        if (abs(destinationRow - startRow) == 1 && abs(destinationCol - startCol) == 1){
-            return true
-        }
-        return false
+    override func isValidBeating(_ destinationCell: (row : Int, col : Int)) -> Bool {
+        return (abs(destinationCell.row - location.row) == 1 && abs(destinationCell.col - location.col) == 1)
     }
 }

@@ -10,35 +10,66 @@ import Foundation
 
 
 class GameController : ChessEventDelegate {
-    var selectedCell = (row: -1, col: -1)
-    var chessEngine = ChessEngine()
-    var gameEventDelegate : GameEventDelegate? 
-    var board : Board?
+
+    var gameEventDelegate : GameEventDelegate?
+    
+    private var selectedCell = (row: -1, col: -1)
+    private var chessEngine = ChessEngine()
+    private var board : Board?
+    
+    private var currentPlayer : Player?
+    private var whitePlayer : Player
+    private var blackPlayer : Player
+    
+    init(_ whitePlayerName: String, _ blackPlayerName: String) {
+        whitePlayer = Player(name: whitePlayerName, color: .White)
+        blackPlayer = Player(name: blackPlayerName, color: .Black)
+    }
     
     func startGame(){
+        currentPlayer = whitePlayer
+        gameEventDelegate?.onCurrentPlayerChanged(currentPlayer: currentPlayer!)
+        
         board = self.chessEngine.generateStartBoard()
         if let notNilBoard = board {
             gameEventDelegate?.onStart(board : notNilBoard)
         }
     }
-    
-    func onCellSelected(row : Int, col : Int) {
-        //check if incoming cell is equal to previous cell
-        if selectedCell == (row, col) {
-            selectedCell = (-1, -1)
+
+    func onPieceSelected(_ selectedCell: (Int, Int)) {
+       self.selectedCell = selectedCell
+    }
+
+    func onPieceMoved(_ destinationCell: (Int, Int)) {
+        if board == nil {
             return
         }
-        //check if the piece have current player color
-        if board?.pieces[row][col].pieceColor == PieceColor.White || selectedCell == (-1, -1){
-            selectedCell = (row, col)
-        } else {
-            if let notNilBoard = board {
-                if notNilBoard.pieces[selectedCell.row][selectedCell.col].isValidMove(startCell: selectedCell, destinationCell: (row, col)) {
-                    notNilBoard.movePiece(fromRow: selectedCell.row, fromCol: selectedCell.col, toRow: row, toCol: col)
-                    gameEventDelegate?.onUpdate()
-                    selectedCell = (-1, -1)
-                }
-            }
+
+        let piece = board!.pieceAt(cell: selectedCell)
+
+        if piece.isValidMove(startCell: selectedCell, destinationCell: destinationCell) {
+            board!.movePiece(fromCell: selectedCell, toCell: destinationCell)
+            gameEventDelegate?.onUpdate()
+            changePlayer()
         }
+    }
+
+    func onPieceBeat(_ beatedCell: (Int, Int)) {
+        if board == nil {
+            return
+        }
+
+        let piece = board!.pieceAt(cell: selectedCell)
+
+        if piece.isValidBeating(beatedCell) {
+            board!.removePiece(selectedCell, beatedCell)
+            gameEventDelegate?.onUpdate()
+            changePlayer()
+        }
+    }
+
+    private func changePlayer() {
+        currentPlayer = currentPlayer === whitePlayer ? blackPlayer : whitePlayer
+        gameEventDelegate?.onCurrentPlayerChanged(currentPlayer: currentPlayer!)
     }
 }

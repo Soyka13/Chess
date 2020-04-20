@@ -9,21 +9,31 @@
 import UIKit
 
 class BoardViewController: UIViewController, GameEventDelegate {
-    
-    
     @IBOutlet weak var boardView: BoardView!
     
-    let gameController = GameController()
+    @IBOutlet weak var blackPlayerLabel: UILabel!
+    @IBOutlet weak var whitePlayerLabel: UILabel!
+    
+    var playersName = (black : "", white : "")
+    
+    var gameController : GameController?
     var chessEngine = ChessEngine()
+    var currentPlayer : Player?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gameController.gameEventDelegate = self
+        gameController = GameController(playersName.white, playersName.black)
+        
+        blackPlayerLabel?.text = playersName.black
+        whitePlayerLabel?.text = playersName.white
+        
+        
+        gameController?.gameEventDelegate = self
    
         boardView.setNeedsDisplay()
         boardView.chessDelegate = gameController
-        gameController.startGame()
+        gameController?.startGame()
     }
     
     /*
@@ -35,6 +45,10 @@ class BoardViewController: UIViewController, GameEventDelegate {
     
     func onUpdate(){
         boardView.update()
+    }
+    
+    func onCurrentPlayerChanged(currentPlayer : Player){
+        boardView.currentPlayer = currentPlayer
     }
     
     func onFinish(){
