@@ -81,7 +81,6 @@
 				B6D706CD244998F900A24575 /* StartGameViewController.swift */,
 				B6B545D223C09CD400D0A8A7 /* BoardViewController.swift */,
 				B6B545E523C09F3500D0A8A7 /* BoardView.swift */,
-				B6BE76F7243CE2C0004F1968 /* GameController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -94,6 +93,18 @@
 				B6B545D723C09CD400D0A8A7 /* chess_demo.xcdatamodeld */,
 			);
 			path = AppStuff;
+			sourceTree = "<group>";
+		};
+		B6A45A2024517E8200D82125 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B647305F243C6D1D009A6EF9 /* Enums.swift */,
+				B6B545E923C0A7A500D0A8A7 /* ChessEngine.swift */,
+				B6D706D02449A0FE00A24575 /* Player.swift */,
+				B6F6FD42244313E300153CFD /* Board.swift */,
+				B6BE76F7243CE2C0004F1968 /* GameController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		B6B545C223C09CD300D0A8A7 = {
@@ -115,16 +126,12 @@
 		B6B545CD23C09CD400D0A8A7 /* chess-demo */ = {
 			isa = PBXGroup;
 			children = (
+				B6B545DF23C09CE100D0A8A7 /* Info.plist */,
+				B6B545DA23C09CE100D0A8A7 /* Assets.xcassets */,
 				B656DC1B2435067600B4E2AF /* AppStuff */,
 				B6D706CF24499D8200A24575 /* Storyboards */,
-				B647305F243C6D1D009A6EF9 /* Enums.swift */,
-				B6B545E723C0A71400D0A8A7 /* ChessPiece.swift */,
-				B6B545E923C0A7A500D0A8A7 /* ChessEngine.swift */,
-				B6D706D02449A0FE00A24575 /* Player.swift */,
-				B6F6FD42244313E300153CFD /* Board.swift */,
+				B6A45A2024517E8200D82125 /* Base */,
 				B6F6FD39243DB13100153CFD /* Delegates */,
-				B6B545DA23C09CE100D0A8A7 /* Assets.xcassets */,
-				B6B545DF23C09CE100D0A8A7 /* Info.plist */,
 				B6F6FD3F24420E9000153CFD /* Utils */,
 				B6D8F199243770EB0052AF5C /* Chess Piece */,
 				B656DC1A243505A300B4E2AF /* UI */,
@@ -144,6 +151,7 @@
 		B6D8F199243770EB0052AF5C /* Chess Piece */ = {
 			isa = PBXGroup;
 			children = (
+				B6B545E723C0A71400D0A8A7 /* ChessPiece.swift */,
 				B6D8F18D243770940052AF5C /* Rook.swift */,
 				B6D8F18F2437709F0052AF5C /* Pawn.swift */,
 				B6D8F191243770AC0052AF5C /* Knight.swift */,
