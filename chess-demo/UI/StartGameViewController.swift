@@ -24,18 +24,18 @@ class StartGameViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is BoardViewController{
             let vc = segue.destination as? BoardViewController
-                if let text = blackPlayerTF.text {
-                    vc?.playersName.black = text
-                }
-                if let text = whitePlayerTF.text {
-                    vc?.playersName.white = text
-                }
+            if let text = blackPlayerTF.text {
+                vc?.playersName.black = text != "" ? text : "Black Player"
+            }
+            if let text = whitePlayerTF.text {
+                vc?.playersName.white = text != "" ? text : "White Player"
+            }
         }
     }
-   
+    
     @IBAction func startGameTapped(_ sender: Any) {
         //        performSegue(withIdentifier: "goToGame", sender: nil)
-            navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     

@@ -8,27 +8,6 @@
 
 import Foundation
 
-//func getIconResByChessPieceType(piece : ChessPiece) -> String {
-//    switch piece {
-//        case is Rook:
-//            return piece.pieceColor == PieceColor.White ? "white_rook" : "black_rook"
-//        case is Pawn:
-//            return piece.pieceColor == PieceColor.White ? "white_pawn" : "black_pawn"
-//        case is Knight:
-//            return piece.pieceColor == PieceColor.White ? "white_knight" : "black_knight"
-//        case is Bishop:
-//            return piece.pieceColor == PieceColor.White ? "white_bishop" : "black_bishop"
-//        case is Queen:
-//            return piece.pieceColor == PieceColor.White ? "white_queen" : "black_queen"
-//        case is King:
-//            return piece.pieceColor == PieceColor.White ? "white_king" : "black_king"
-//        case is Blank:
-//            return ""
-//        default:
-//            return ""
-//    }
-//}
-
 func getIconResByChessPieceType(piece : ChessPiece) -> String {
     switch piece {
         case is Rook:

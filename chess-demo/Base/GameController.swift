@@ -47,7 +47,7 @@ class GameController : ChessEventDelegate {
 
         let piece = board!.pieceAt(cell: selectedCell)
 
-        if piece.isValidMove(startCell: selectedCell, destinationCell: destinationCell) {
+        if piece.isValidMove(startCell: selectedCell, destinationCell: destinationCell) && board!.isPathClear(selectedCell, destinationCell){
             board!.movePiece(fromCell: selectedCell, toCell: destinationCell)
             gameEventDelegate?.onUpdate()
             changePlayer()
@@ -61,7 +61,7 @@ class GameController : ChessEventDelegate {
 
         let piece = board!.pieceAt(cell: selectedCell)
 
-        if piece.isValidBeating(beatedCell) {
+        if piece.isValidBeating(beatedCell) && board!.isPathClear(selectedCell, beatedCell){
             board!.removePiece(selectedCell, beatedCell)
             gameEventDelegate?.onUpdate()
             changePlayer()
