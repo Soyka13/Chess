@@ -13,16 +13,11 @@ class Bishop: ChessPiece {
         super.init(pieceColor: pieceColor, location: location)
     }
     
-    //    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int) -> Bool {
-    //        if(abs(destinationRow - startRow) == abs(destinationCol - startCol)) {
-    //            return true
-    //        }
-    //        return false
-    //    }
     override func isValidMove(startCell: (row: Int, col: Int), destinationCell: (row: Int, col: Int)) -> Bool {
         if(abs(destinationCell.row - startCell.row) == abs(destinationCell.col - startCell.col)) {
             return true
         }
         return false
     }
+    
 }

@@ -13,12 +13,6 @@ class Knight: ChessPiece {
         super.init(pieceColor: pieceColor, location: location)
     }
     
-    //    override func isValidMove(startRow: Int, startCol: Int, destinationRow: Int, destinationCol: Int) -> Bool {
-    //        if (abs(destinationRow - startRow) == 1 && abs(destinationCol - startCol) == 2 ) || (abs(destinationRow - startRow) == 2 && abs(destinationCol - startCol) == 1 ){
-    //            return true
-    //        }
-    //        return false
-    //    }
     override func isValidMove(startCell: (row: Int, col: Int), destinationCell: (row: Int, col: Int)) -> Bool {
         if (abs(destinationCell.row - startCell.row) == 1 && abs(destinationCell.col - startCell.col) == 2 ) || (abs(destinationCell.row - startCell.row) == 2 && abs(destinationCell.col - startCell.col) == 1 ){
             return true

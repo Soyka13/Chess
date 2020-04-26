@@ -20,6 +20,10 @@ class BoardViewController: UIViewController, GameEventDelegate {
     var chessEngine = ChessEngine()
     var currentPlayer : Player?
     
+    private var alertTitle = ""
+    private var alertMessage = ""
+    private var alertActionTitle = "OK"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +34,7 @@ class BoardViewController: UIViewController, GameEventDelegate {
         
         
         gameController?.gameEventDelegate = self
-   
+        
         boardView.setNeedsDisplay()
         boardView.chessDelegate = gameController
         gameController?.startGame()
@@ -52,7 +56,13 @@ class BoardViewController: UIViewController, GameEventDelegate {
     }
     
     func onFinish(){
-        
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: {
+            action in
+            let startViewController = self.storyboard?.instantiateViewController(withIdentifier: "StartGameViewController")
+            self.present(startViewController!, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

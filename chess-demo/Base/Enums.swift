@@ -13,3 +13,9 @@ enum PieceColor {
     case Black
     case Blank
 }
+
+enum Direction {
+    case Horizontal
+    case Vertical
+    case Diagonal
+}
